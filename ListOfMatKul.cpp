@@ -8,7 +8,7 @@ ListOfMatKul::~ListOfMatKul(){
     delete[] daftarMatkul;
 };
 
-ListOfMatKul::addMatKul(MatKul* MatKul){
+void ListOfMatKul::addMatKul(MatKul* MatKul){
     daftarMatkul[banyakMatKul] = MatKul;
     banyakMatKul++;
 }
