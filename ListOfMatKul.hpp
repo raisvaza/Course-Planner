@@ -5,8 +5,8 @@ using namespace std;
 
 class ListOfMatKul {
     private:
-        MatKul* daftarMatkul[];
         int banyakMatKul;
+        MatKul* daftarMatkul[];
     public:
         ListOfMatKul();
         ~ListOfMatKul();

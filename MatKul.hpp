@@ -6,8 +6,8 @@ using namespace std;
 class MatKul {
     private:
         string kodeMatKul;
-        MatKul* prereq[];
         int banyakPrereq;
+        MatKul* prereq[];
     public:
         MatKul(string kodeMatKul);
         ~MatKul();
