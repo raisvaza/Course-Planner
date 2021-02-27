@@ -9,14 +9,13 @@ class MatKul {
         MatKul* prereq[];
         int banyakPrereq;
     public:
-        MatKul();
-        MatKul(string kodeMatKul, MatKul* prereq);
+        MatKul(string kodeMatKul);
         ~MatKul();
 
-        string getKodeMatkul();
+        string getKodeMatKul();
         void showPrereq();
         void setKodeMatkul(string kodeMatkul);
-        void addPrereq(MatKul& Matkul, string kodeMatKul);
+        void addPrereq(MatKul* MatKul);
 };
 
 #endif
