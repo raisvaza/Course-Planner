@@ -1,5 +1,5 @@
-#ifndef __MATKUL__HPP__
-#define __MATKUL__HPP__
+#ifndef MATKUL_H
+#define MATKUL_H
 #include <string>
 using namespace std;
 
@@ -7,6 +7,7 @@ class MatKul {
     private:
         string kodeMatKul;
         int banyakPrereq;
+        int derajatMasuk;
         MatKul* prereq[];
     public:
         MatKul(string kodeMatKul);
@@ -16,6 +17,8 @@ class MatKul {
         void showPrereq();
         void setKodeMatkul(string kodeMatkul);
         void addPrereq(MatKul* MatKul);
+        int getDerajatMasuk();
+        void setDerajatMasuk(int derajat);
 };
 
 #endif

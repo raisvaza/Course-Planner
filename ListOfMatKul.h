@@ -1,6 +1,6 @@
-#ifndef __LISTOFMATKUL__HPP__
-#define __LISTOFMATKUL__HPP__
-#include "MatKul.hpp"
+#ifndef LISTOFMATKUL_H
+#define LISTOFMATKUL_H
+#include "MatKul.h"
 using namespace std;
 
 class ListOfMatKul {
@@ -12,6 +12,9 @@ class ListOfMatKul {
         ~ListOfMatKul();
         
         void addMatKul(MatKul* MatKul);
+        bool adaMatKul(string namaMatKul);
+        void topSort();
+        MatKul *CariMatKulPendahulu();
 };
 
 #endif

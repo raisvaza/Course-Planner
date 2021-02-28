@@ -1,9 +1,10 @@
-#include "MatKul.hpp"
+#include "MatKul.h"
 #include <iostream>
 
 MatKul::MatKul(string kodeMatKul){
     this->kodeMatKul = kodeMatKul;
     this->banyakPrereq = 0;
+    this->derajatMasuk = 0;
 }
 
 MatKul::~MatKul(){
@@ -32,4 +33,13 @@ void MatKul::setKodeMatkul(string kodeMatKul){
 void MatKul::addPrereq(MatKul* MatKul){
     prereq[banyakPrereq] = MatKul;
     this->banyakPrereq++;
+    MatKul->setDerajatMasuk(MatKul->getDerajatMasuk() + 1);
+}
+
+int MatKul::getDerajatMasuk(){
+    return this->derajatMasuk;
+}
+
+void MatKul::setDerajatMasuk(int derajat){
+    this->derajatMasuk = derajat;
 }

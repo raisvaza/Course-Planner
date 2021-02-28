@@ -1,5 +1,5 @@
-#include "MatKul.hpp"
-#include "ListOfMatKul.hpp"
+#include "MatKul.h"
+#include "ListOfMatKul.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -9,7 +9,7 @@
 using namespace std;
 
 int main(){
-    ListOfMatKul daftarMatKul();
+    ListOfMatKul daftarMataKuliah;
     ifstream myFile("Test.txt");
     string baris;
     string daftarNilai;
@@ -39,17 +39,33 @@ int main(){
         
         for (int i = 0; i < temp.size(); i++)
         {
+            MatKul *A;
             if (i == 0)
-            {
+            {// Proses Mata Kuliah
                 cout << "Bikin matkul " << temp[i] << endl;
-            } else {
+                A = new MatKul(temp[i]);
+                daftarMataKuliah.addMatKul(A);
+            } else {// Proses Prereq
                 cout << "Bikin prereq " << temp[i] << endl;
+                MatKul *B;
+                if (!daftarMataKuliah.adaMatKul(temp[i]))
+                {// Kalau prereq belum terdaftar di daftar mata kuliah
+                    
+                    B = new MatKul(temp[i]);
+                    daftarMataKuliah.addMatKul(B);
+                }
+                
+                // Tambah B sebagai prereq A
+                A->addPrereq(B);
             }
             
-        }
+        } // Satu baris MatKul dengan prereq-nya selesai diproses
         
         
     }
+
+    // TOPOLOGICAL SORT
+
 
 
     myFile.close();
