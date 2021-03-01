@@ -1,35 +1,43 @@
-def isInDaftar(namaMatkul, daftarMatkul):
-    found = False
-    for i in range(len(daftarMatkul)):
-        for j in range(len(daftarMatkul[i])):
-            if daftarMatkul[i][j] == namaMatkul:
-                found = True
-    return found
-
 def addToDaftar(namaMatkul, daftarMatkul):
     i = 0
     while daftarMatkul[i][0] != "":
         i = i + 1
-    daftarMatkul[i] == (namaMatkul, 1)
+    temp = list(daftarMatkul[i])
+    temp[0] = namaMatkul
+    temp[1] = 0
+    temp[2] = False
+    daftarMatkul[i] = tuple((temp[0],int(temp[1]),temp[2]))
 
-def indeksMatkul(namaMatkul, daftarMatkul):
-    for i in range(len(daftarMatkul)):
-        if daftarMatkul[i][0] == namaMatkul:
-            return i
+def konversiAngka(angka):
+    if angka == 1:
+        return "I"
+    elif angka == 2:
+        return "II"
+    elif angka == 3:
+        return "III"
+    elif angka == 4:
+        return "IV"
+    elif angka == 5:
+        return "V"
+    elif angka == 6:
+        return "VI"
+    elif angka == 7:
+        return "VII"
+    elif angka == 8:
+        return "VIII"
 
-def hapusMatkul(namaMatkul, daftarMatkul, baris, nMatkul, semester):
-    if daftarMatkul[indeksMatkul(namaMatkul,daftarMatkul)][1] == 1:
-        print("Semester " + semester + ": " + namaMatkul)
-        daftarMatkul[indeksMatkul(namaMatkul,daftarMatkul)].pop()
-        nMatkul -= 1
-        for i in baris:
-            if baris[i][0] == namaMatkul:
-                if len(baris[i]) > 1:
-                    for j in range(1, len(baris[i]), 1):
-                        daftarMatkul[indeksMatkul(baris[i][j], daftarMatkul)][1] -= 1
-                        if daftarMatkul[indeksMatkul(baris[i][j], daftarMatkul)][1] == 1:
-                            hapusMatkul(baris[i][j], daftarMatkul, baris, nMatkul, semester + 1)
-
+def hapusMatkul(i,daftarMatkul, baris, semester):
+    if daftarMatkul[i][1] == 0:
+            for j in range(len(baris)):
+                for k in range(1,len(baris[j]),1):
+                    if daftarMatkul[i][0] == baris[j][k]:
+                        temp = list(daftarMatkul[j])
+                        temp[1] -= 1
+                        daftarMatkul[j] = tuple(temp)
+                        hapusMatkul(j,daftarMatkul,baris,semester+1)
+            temp = list(daftarMatkul[i])
+            temp[2] = True
+            print("Semester " + konversiAngka(semester) + ": " + daftarMatkul[i][0])
 
 # Mengubah file masukan menjadi array of array
 f = open("Test.txt", 'r')
@@ -41,22 +49,22 @@ for i in range(len(lines)):
     baris[i] = baris[i].split(",")
 
 # inisialisasi daftar matkul
-daftarMatkul = [("",0) for i in range(100)] # Daftar mata kuliah dengan jumlah kemunculannya
+daftarMatkul = [("",0,False) for i in range(len(baris))] # Daftar mata kuliah dengan derajat masuknya
 nMatkul = 0
 
 # Mendaftar semua matkul
 for i in range(len(baris)):
-    for j in range(len(baris[i])):
-        if (not(isInDaftar(baris[i][j],daftarMatkul))):
-            addToDaftar(baris[i][j],daftarMatkul)
-            nMatkul = nMatkul + 1
-        else:
-            daftarMatkul[indeksMatkul(baris[i][j], daftarMatkul)][1] += 1
+    addToDaftar(baris[i][0], daftarMatkul)
+    nMatkul += 1
 
-# TOPOLOGICAL SORT
-# Mencari matkul dengan kemunculan paling sedikit
-i = 0
+# Mencatat derajat masuk
+for i in range(len(baris)):
+    derajatMasuk = 0
+    for j in range(1,len(baris[i]),1):
+        derajatMasuk += 1
+        daftarMatkul[i] = tuple((daftarMatkul[i][0],derajatMasuk, False))
+
 semester = 1
-while nMatkul != 0:
-    hapusMatkul(daftarMatkul[i][0], daftarMatkul, baris, nMatkul, semester)
-    i += 1
+for i in range(len(daftarMatkul)):
+    if daftarMatkul[i][2] == False:
+        hapusMatkul(i,daftarMatkul,baris,semester)
