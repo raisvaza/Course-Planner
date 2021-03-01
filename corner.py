@@ -78,7 +78,8 @@ def isVisitedAll(daftarMatkul):
     return isVisitedAll
 
 # Mengubah file masukan menjadi array of array
-f = open("Test.txt", 'r')
+namaFile = str(input("Masukkan nama file: "))
+f = open(namaFile, 'r')
 lines = f.readlines()
 baris = ["" for i in range(len(lines))]
 for i in range(len(lines)):
@@ -95,7 +96,7 @@ for i in range(len(baris)):
     addToDaftar(baris[i][0], daftarMatkul)
     nMatkul += 1
 
-# Mencatat derajat masuk
+# Mencatat derajat masuk setiap mata kuliah
 for i in range(len(baris)):
     derajatMasuk = 0
     for j in range(1,len(baris[i]),1):
