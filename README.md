@@ -2,4 +2,5 @@
 Corner is a course planner program using topological sort.
 
 ## Use instruction
-Download the files and run corner.py from your device. The other files are the previously developed files which ended up unused.
+1. Run corner.py from your device
+2. Enter the name of the file containing the list of the courses
